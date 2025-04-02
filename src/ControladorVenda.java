@@ -21,6 +21,12 @@ public class ControladorVenda {
             return false;
         }
 
+        for (Jogo jogo : carrinho.getItens()) {
+            if (jogo instanceof JogoFisico) {
+                ((JogoFisico) jogo).reduzirEstoque();
+            }
+        }
+        
         double total = carrinho.calcularTotal(promocao);
         System.out.println("-----Resumo da Compra-----\n");
         System.out.println("Cliente: " + usuario.getNome());

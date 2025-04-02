@@ -9,4 +9,15 @@ public class JogoFisico extends Jogo{
     public int getQntEstoque() {
         return qntEstoque;
     }
+
+    @Override
+    public String getDetalhes(){
+        return "Estoque: " + qntEstoque + " unidades";
+    }
+
+    public void reduzirEstoque() {
+        if (qntEstoque > 0) {
+            qntEstoque--;
+        }
+    }
 }

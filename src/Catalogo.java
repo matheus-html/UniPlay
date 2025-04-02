@@ -30,7 +30,9 @@ public class Catalogo {
         System.out.println("Jogos comprados: ");
 
         for(int i = 0; i<jogos.size(); i++){
-            System.out.println((i+1) +"."+ jogos.get(i).getTitulo());
+            Jogo jogo = jogos.get(i);
+            System.out.println((i+1) +"."+ jogo.getTitulo() + " ("+jogo.getDetalhes()+")");
+            System.out.println("Obrigado por comprar na UniPlay!");
         }
         System.out.println(" ");
     }

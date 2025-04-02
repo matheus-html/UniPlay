@@ -21,4 +21,5 @@ public abstract class Jogo {
         String infoJogo = titulo + " (" + genero + ") - " + "R$ " + preco;
         return infoJogo;
     }
+    public abstract String getDetalhes();
 }

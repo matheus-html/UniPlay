@@ -17,8 +17,11 @@ public class Compra {
 
             switch (opcao) {
                 case 1:
-                    for(int i=0;i<controlador.listarJogos().size();i++) {
-                        System.out.println((i+1) + ". " + controlador.listarJogos().get(i));
+                    List<Jogo> jogos = controlador.listarJogos();
+
+                    for(int i=0; i<jogos.size(); i++){
+                        Jogo jogo = jogos.get(i);
+                        System.out.println((i+1) + ". " + jogo + " - " + jogo.getDetalhes());
                     }
                     break;
                 case 2:
@@ -48,7 +51,7 @@ public class Compra {
                         System.out.println("Carrinho vazio.");
                     } else {
                         for (Jogo item : itens) {
-                            System.out.println("- " + item.getTitulo());
+                            System.out.println("- " + item.getTitulo() + " (" + item.getDetalhes() + ")");
                         }
 
                         Promocao promocao = new Promocao();
