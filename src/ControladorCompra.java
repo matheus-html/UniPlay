@@ -1,11 +1,11 @@
 import java.util.List;
 
-public class ControladorVenda {
+public class ControladorCompra {
     private Catalogo catalogo;
     private Promocao promocao;
     private Pagamento pagamento;
 
-    public ControladorVenda(){
+    public ControladorCompra(){
         this.catalogo = new Catalogo();
         this.promocao = new Promocao();
         this.pagamento = new Pagamento();
@@ -21,12 +21,12 @@ public class ControladorVenda {
             return false;
         }
 
-        for (Jogo jogo : carrinho.getItens()) {
+/*        for (Jogo jogo : carrinho.getItens()) {
             if (jogo instanceof JogoFisico) {
                 ((JogoFisico) jogo).reduzirEstoque();
             }
-        }
-        
+        }*/
+
         double total = carrinho.calcularTotal(promocao);
         System.out.println("-----Resumo da Compra-----\n");
         System.out.println("Cliente: " + usuario.getNome());

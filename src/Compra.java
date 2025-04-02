@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Compra {
-    private static ControladorVenda controlador = new ControladorVenda();
+    private static ControladorCompra controlador = new ControladorCompra();
     private static CarrinhoCompras carrinho = new CarrinhoCompras();
     private static Usuario usuario;
 

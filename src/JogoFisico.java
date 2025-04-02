@@ -6,18 +6,14 @@ public class JogoFisico extends Jogo{
        this.qntEstoque = qntEstoque;
     }
 
-    public int getQntEstoque() {
-        return qntEstoque;
-    }
-
     @Override
     public String getDetalhes(){
         return "Estoque: " + qntEstoque + " unidades";
     }
 
-    public void reduzirEstoque() {
+/*    public void reduzirEstoque() {
         if (qntEstoque > 0) {
             qntEstoque--;
         }
-    }
+    }*/
 }
