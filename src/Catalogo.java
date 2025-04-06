@@ -25,7 +25,6 @@ public class Catalogo {
     }
 
     public void registrarCompra(List<Jogo> jogos){
-        System.out.println("Pagamento efetuado com sucesso!");
         System.out.println("Jogos comprados: ");
 
         for(int i = 0; i<jogos.size(); i++){

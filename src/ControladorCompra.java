@@ -15,6 +15,15 @@ public class ControladorCompra {
         return catalogo.getJogos();
     }
 
+    public void registrarCompra(List<Jogo> jogos) {
+        System.out.println("Jogos comprados: ");
+        for (int i = 0; i < jogos.size(); i++) {
+            Jogo jogo = jogos.get(i);
+            System.out.println((i+1) + ". " + jogo.getTitulo() + " (" + jogo.getDetalhes() + ")");
+        }
+        System.out.println("Obrigado por comprar na UniPlay!\n");
+    }
+
     public boolean processarCompra(Usuario usuario, CarrinhoCompras carrinho, int formaPagamento){
         if(carrinho.getItens().isEmpty()){
             System.out.println("Carrinho vazio!");
@@ -33,7 +42,7 @@ public class ControladorCompra {
         System.out.println("Email: " + usuario.getEmail());
         if(formaPagamento == 1){
             System.out.println("Forma de pagamento: Cartão" );
-        } else {
+        } else if(formaPagamento == 2){
             System.out.println("Forma de pagamento: PIX" );
         }
         System.out.printf("Total: R$ %.2f%n", total);
@@ -42,7 +51,7 @@ public class ControladorCompra {
             return false;
         }
 
-        catalogo.registrarCompra(carrinho.getItens());
+        registrarCompra(carrinho.getItens());
         return true;
     }
 }
