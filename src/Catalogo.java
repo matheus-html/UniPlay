@@ -13,7 +13,7 @@ public class Catalogo {
     }
 
     public List<Jogo> getJogos() {
-        return new ArrayList<>(jogos);
+        return jogos;
     }
 
     public Jogo jogoIndex(int index) {
@@ -22,16 +22,5 @@ public class Catalogo {
         } else {
             return null;
         }
-    }
-
-    public void registrarCompra(List<Jogo> jogos){
-        System.out.println("Jogos comprados: ");
-
-        for(int i = 0; i<jogos.size(); i++){
-            Jogo jogo = jogos.get(i);
-            System.out.println((i+1) +"."+ jogo.getTitulo() + " ("+jogo.getDetalhes()+")");
-            System.out.println("Obrigado por comprar na UniPlay!");
-        }
-        System.out.println(" ");
     }
 }

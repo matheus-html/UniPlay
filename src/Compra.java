@@ -8,8 +8,8 @@ public class Compra {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         boolean continuar = true;
+
         while (continuar) {
             mostrarMenu();
             int opcao = sc.nextInt();
@@ -29,8 +29,7 @@ public class Compra {
                     int num = sc.nextInt() - 1;
                     sc.nextLine();
 
-                    Catalogo catalogo = new Catalogo();
-                    Jogo jogo = catalogo.jogoIndex(num);
+                    Jogo jogo = controlador.listarJogos().get(num);
 
                     if (jogo != null) {
                         carrinho.adicionarItem(jogo);
@@ -39,23 +38,28 @@ public class Compra {
                     }
                     break;
                 case 3:
-                    System.out.println("Digite o cupom de desconto: \n");
+                    System.out.println("Digite o cupom (GAMER10, GAMER20): ");
                     String cupom = sc.nextLine();
+
+                    if ("GAMER10".equals(cupom)) {
+                        carrinho.setDescontoStrategy(new DescontoGamer10());
+                    } else if ("GAMER20".equals(cupom)) {
+                        carrinho.setDescontoStrategy(new DescontoGamer20());
+                    }
                     carrinho.aplicarCupom(cupom);
+
                     break;
                 case 4:
                     System.out.println("-----Carrinho-----");
                     List<Jogo> itens = carrinho.getItens();
 
-                    if(itens.isEmpty()){
+                    if (itens.isEmpty()) {
                         System.out.println("Carrinho vazio.");
                     } else {
                         for (Jogo item : itens) {
                             System.out.println("- " + item.getTitulo() + " (" + item.getDetalhes() + ")");
                         }
-
-                        Promocao promocao = new Promocao();
-                        double total = carrinho.calcularTotal(promocao);
+                        double total = carrinho.calcularTotal();
                         System.out.printf("Total: R$ %.2f%n", total);
                     }
                     break;
@@ -72,7 +76,7 @@ public class Compra {
                     int pag = sc.nextInt();
                     sc.nextLine();
 
-                    if (controlador.processarCompra(usuario, carrinho, pag)){
+                    if (controlador.processarCompra(usuario, carrinho, pag)) {
                         carrinho = new CarrinhoCompras();
                     }
                     break;

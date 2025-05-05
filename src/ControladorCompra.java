@@ -2,13 +2,14 @@ import java.util.List;
 
 public class ControladorCompra {
     private Catalogo catalogo;
-    private Promocao promocao;
-    private Pagamento pagamento;
+    private PagamentoStrategy pagamentoStrategy;
 
     public ControladorCompra(){
         this.catalogo = new Catalogo();
-        this.promocao = new Promocao();
-        this.pagamento = new Pagamento();
+    }
+
+    public void setPagamentoStrategy(PagamentoStrategy pagamentoStrategy) {
+        this.pagamentoStrategy = pagamentoStrategy;
     }
 
     public List<Jogo> listarJogos(){
@@ -19,7 +20,7 @@ public class ControladorCompra {
         System.out.println("Jogos comprados: ");
         for (int i = 0; i < jogos.size(); i++) {
             Jogo jogo = jogos.get(i);
-            System.out.println((i+1) + ". " + jogo.getTitulo() + " (" + jogo.getDetalhes() + ")");
+            System.out.println((i+1) + ". " + jogo.getTitulo());
         }
         System.out.println("Obrigado por comprar na UniPlay!\n");
     }
@@ -30,24 +31,41 @@ public class ControladorCompra {
             return false;
         }
 
-/*        for (Jogo jogo : carrinho.getItens()) {
+        for (Jogo jogo : carrinho.getItens()) {
+            if (jogo instanceof JogoFisico) {
+                JogoFisico jogoFisico = (JogoFisico) jogo;
+                if (jogoFisico.getQntEstoque() <= 0) {
+                    System.out.println("Jogo " + jogoFisico.getTitulo() + " sem estoque disponível!");
+                    return false;
+                }
+            }
+        }
+
+        for (Jogo jogo : carrinho.getItens()) {
             if (jogo instanceof JogoFisico) {
                 ((JogoFisico) jogo).reduzirEstoque();
             }
-        }*/
+        }
 
-        double total = carrinho.calcularTotal(promocao);
+        double total = carrinho.calcularTotal();
         System.out.println("-----Resumo da Compra-----\n");
         System.out.println("Cliente: " + usuario.getNome());
         System.out.println("Email: " + usuario.getEmail());
-        if(formaPagamento == 1){
-            System.out.println("Forma de pagamento: Cartão" );
-        } else if(formaPagamento == 2){
-            System.out.println("Forma de pagamento: PIX" );
+
+        if (formaPagamento == 1) {
+            setPagamentoStrategy(new PagamentoCartao());
+            System.out.println("Forma de pagamento: Cartão");
+        } else if (formaPagamento == 2) {
+            setPagamentoStrategy(new PagamentoPix());
+            System.out.println("Forma de pagamento: PIX");
+        } else {
+            System.out.println("Forma de pagamento inválida!");
+            return false;
         }
+
         System.out.printf("Total: R$ %.2f%n", total);
 
-        if(!pagamento.processarPagamento(total)){
+        if (pagamentoStrategy == null || !pagamentoStrategy.processarPagamento(total)) {
             return false;
         }
 

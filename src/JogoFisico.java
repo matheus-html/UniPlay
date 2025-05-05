@@ -11,9 +11,16 @@ public class JogoFisico extends Jogo{
         return "Estoque: " + qntEstoque + " unidades";
     }
 
-/*    public void reduzirEstoque() {
+    public void reduzirEstoque() {
         if (qntEstoque > 0) {
             qntEstoque--;
+            System.out.println("Estoque de " + getTitulo() + " reduzido para: " + qntEstoque);
+        } else {
+            System.out.println("Estoque esgotado para " + getTitulo());
         }
-    }*/
+    }
+
+    public int getQntEstoque() {
+        return qntEstoque;
+    }
 }
